@@ -1,0 +1,136 @@
+@import './colours.scss';
+
+.Setup {
+
+    .table-info {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 32px;
+
+        .table-name {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .table-status {
+            display: flex;
+            align-items: center;
+            font-weight: 300;
+            font-size: 16px;
+
+            .status-indicator {
+                width: 9px;
+                height: 9px;
+                border-radius: 1em;
+                background-color: $green;
+                margin: 2px 0 0 8px;
+            }
+        }
+
+    }
+
+    .player-list {
+        margin-bottom: 45px;
+
+        .player-option {
+            position: relative;
+            padding: 8px 0;
+            border-radius: 5px;
+            border: 2px solid #707070;
+            margin-bottom: 14px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+    
+            transition: all .2s ease;
+    
+            .player-name {
+                font-size: 20px;
+                margin-left: 10px;
+            }
+    
+            .selected-indicator {
+                width: 24px;
+                height: 24px;
+                border: 2px solid #707070;
+                border-radius: 1em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all .2s ease;
+                margin-right: 10px;
+    
+                .tick {
+                    width: 15px;
+                    height: 10px;
+                }
+            }
+
+            .delete-interface {
+                position: absolute;
+                width: calc(100% + 4px);
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                z-index: 2;
+                margin: 0 -2px 0 -2px;
+
+                opacity: 0;
+                pointer-events: none;
+                transition: all .2s ease;
+
+                div {
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 18px;
+                }
+
+                .delete {
+                    background-color: $red;
+                    color: white;
+                    border: 2px solid $red;
+                    border-radius: 5px 0 0 5px;
+                }
+
+                .cancel {
+                    background-color: #dadada;
+                    border: 2px solid #dadada;
+                    border-radius: 0 5px 5px 0;
+                }
+            }
+        }
+    }
+
+    .register-new-player {
+
+        .player-form {
+            display: flex;
+            margin-bottom: 75px;
+
+            input {
+                padding: 8px 10px;
+                border-radius: 5px;
+                border: 2px solid #707070;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                width: 50%;
+                outline: none;
+            }
+
+            .call-to-action {
+                flex-grow: 1;
+                margin-left: 10px;
+                font-weight: 300;
+            }
+
+        }
+        
+    }
+    
+}

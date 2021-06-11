@@ -1,0 +1,118 @@
+@import './colours.scss';
+
+.Game {
+
+    .scoreboard {
+        background-color: $purpleSuperLight;
+        padding: 12px 8px;
+        border-radius: 8px;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, .10);
+        margin-bottom: 20vh;
+
+        table {
+            width: 100%;
+            text-align: left;
+            border: none;
+            
+            th {
+                font-weight: 300;
+            }
+
+            .labels {
+                font-size: 12px;
+
+                th {
+                    padding-bottom: 12px;
+                }
+            }
+
+            .player {
+                font-size: 24px;
+
+                th {
+                    padding: 10px 0;
+                }
+
+                .name {
+                    padding-left: 10px;
+                    border-radius: 5px 0 0 5px;
+                }
+
+                .break {
+                    font-weight: normal;
+                }
+
+                .score {
+                    padding-right: 10px;
+                    border-radius: 0 5px 5px 0;
+                    font-weight: 700;
+                }
+            }
+
+            .score {
+                text-align: right;
+            }
+        }
+    }
+
+    .controls {
+
+        transition: all .2s ease;
+
+        .button {
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0 16px 0;
+            margin-bottom: 25px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, .15);
+        }
+
+        .safe {
+            background-color: $green;
+        }
+
+        .foul {
+            background-color: $red;
+        }
+
+        .black {
+            background-color: $dark;
+        }
+    }
+
+    .toggle {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        .label {
+            color: $purpleLight;
+            font-size: 16px;
+        }
+
+        .switch {
+            transition: all .2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 58px;
+            height: 16px;
+            border: 1.5px solid $purpleLight;
+            border-radius: 1em;
+            padding: 2.5px;
+            background-color: $purpleLight;
+            margin-left: 10px;
+
+            .pip {
+                transition: all .2s ease;
+                width: 28px;
+                height: calc(100% + 2px);
+                border-radius: 1em;
+            }
+        }
+    }
+}
