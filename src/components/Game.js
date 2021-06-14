@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import axios from 'axios';
+import Chart from './Chart';
+import Toggle from './Toggle';
 
 function Game(props) {
+    const history = useHistory();
     const location = useLocation();
     const { gameId, jwt } = location.state;
 
     const [gameData, setGameData] = useState({ players: [] });
     const [showControls, setShowControls] = useState(true);
+    const [showChart, setShowChart] = useState(true);
+
+    const goToSummary = useCallback(() => {
+        history.push({
+            pathname: '/summary',
+            state: { gameId: gameId, jwt: jwt }
+        });
+    }, [history, gameId, jwt])
 
     useEffect(() => {
         const socket = socketIOClient('http://localhost:8080?data=' + gameId);
         socket.on('GameData', data => {
+            console.log(data);
+            if (data.isComplete) return goToSummary();
             setGameData(data);
         });
-    }, []);
+    }, [goToSummary, setGameData, gameId]);
 
     const styles = {
         current: {
             backgroundColor: '#7262F6',
             color: '#fff'
         },
-        notCurrent: {
-
-        }
+        notCurrent: {}
     }
 
     async function handleNextPlayer(code) {
@@ -46,13 +57,31 @@ function Game(props) {
                 'x-auth-token': jwt
             }
         });
+        if (result.data.isComplete) return goToSummary();
         setGameData(result.data);
     }
 
     function handleControlToggle() {
         props.showHideHeader(showControls);
         setShowControls(!showControls);
+    }
 
+    function handleChartToggle() {
+        setShowChart(!showChart);
+    }
+
+    async function handleEndGame() {
+        const result = await axios({
+            method: 'POST',
+            url: 'http://localhost:8080/api/games/endgame',
+            data: { gameId: gameId },
+            headers: {
+                'x-auth-token': jwt
+            }
+        });
+
+        console.log(result);
+        if (result.status === 200) return goToSummary();
     }
 
     return (
@@ -84,33 +113,31 @@ function Game(props) {
                     ))}
                     </tbody>
                 </table>
-                
             </div>
 
+            {gameData.chartData ? <Chart visible={showChart} chartData={gameData.chartData} /> : <div></div>}
+
             <div className='controls' 
-                style={{ opacity: showControls ? 1 : 0, pointerEvents: showControls ? 'all' : 'none'}}
+                style={{ 
+                    opacity: showControls ? 1 : 0, 
+                    pointerEvents: showControls ? 'all' : 'none',
+                    transform: showChart ? 'translateY(0px)' : 'translateY(-100px)'
+                }}
             >
                 <div className='button safe' onClick={(() => handleNextPlayer(1))}>Safe</div>
                 <div className='button foul' onClick={(() => handleNextPlayer(2))}>Nope</div>
                 <div className='button black' onClick={(() => handleNextPlayer(3))}>Black</div>
             </div>
-            <div className='toggle' 
-                onClick={handleControlToggle}
-            >
-                <div className='label'>Controls</div>
-                <div className='switch' 
-                    style={{
-                        backgroundColor: showControls ? '#7262F6' : '#F8F6FF'
-                    }}
-                >
-                    <div className='pip'
-                        style={{
-                            transform: showControls ? 'translateX(0px)' : 'translateX(-30px)',
-                            backgroundColor: showControls ? '#fff' : '#7262F6'
-                        }}
-                    ></div>
-                </div>
+
+            <div style={{display: 'flex'}}>
+                <Toggle label={'Controls'} onToggle={handleControlToggle} on={showControls}/>
+                <Toggle label={'Chart'} onToggle={handleChartToggle} on={showChart}/>
             </div>
+
+            <div className='end-game secondary-cta'
+                onClick={handleEndGame}
+                style={{marginBottom: '10vh'}}
+            >End Game</div>
         </div>
     )
 }

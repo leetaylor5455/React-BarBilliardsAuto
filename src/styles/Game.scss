@@ -7,7 +7,7 @@
         padding: 12px 8px;
         border-radius: 8px;
         box-shadow: 0px 3px 10px rgba(0, 0, 0, .10);
-        margin-bottom: 20vh;
+        margin-bottom: 20px;
 
         table {
             width: 100%;
@@ -70,6 +70,7 @@
             padding: 15px 0 16px 0;
             margin-bottom: 25px;
             box-shadow: 0px 3px 8px rgba(0, 0, 0, .15);
+            cursor: pointer;
         }
 
         .safe {
@@ -89,6 +90,9 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+        margin-bottom: 10vh;
+        margin-right: 40px;
+
         .label {
             color: $purpleLight;
             font-size: 16px;

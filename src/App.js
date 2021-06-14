@@ -6,6 +6,7 @@ import Header from './components/Header';
 import TablesMenu from './components/TablesMenu';
 import Setup from './components/Setup';
 import Game from './components/Game';
+import Summary from './components/Summary';
 
 function App() {
 
@@ -26,9 +27,10 @@ function App() {
           <Route 
             path='/game' 
             render={(props) => (
-              <Game {...props} showHideHeader={showHideHeader} />
+              <Game {...props} showHideHeader={showHideHeader}/>
             )}
           />
+          <Route path='/summary' component={Summary}/>
         </Switch>
       </div>
     </Router>

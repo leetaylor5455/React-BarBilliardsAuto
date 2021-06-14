@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -28,19 +28,6 @@ function Setup() {
         setSelectedPlayers(tempSelectedPlayers);
     }
 
-
-    async function getPlayerList() {
-        const result = await axios({
-            method: 'GET',
-            url: 'http://localhost:8080/api/players',
-            headers: {
-                'x-auth-token': jwt
-            }
-        });
-        console.log(result)
-        setPlayerData(result.data);
-    }
-
     function handlePlayerInput(event) {
         setNewPlayerInput(event.target.value);
     }
@@ -65,9 +52,21 @@ function Setup() {
         }
     }
 
+    const getPlayerList = useCallback(async () => {
+        const result = await axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/players',
+            headers: {
+                'x-auth-token': jwt
+            }
+        });
+        console.log(result)
+        setPlayerData(result.data);
+    }, [jwt]);
+
     useEffect(() => {
         getPlayerList();
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [getPlayerList])
 
     async function handleDeletePlayer(playerId) {
         console.log(playerId)
@@ -90,7 +89,7 @@ function Setup() {
         try {
             const result = await axios({
                 method: 'POST',
-                url: 'http://localhost:8080/api/games',
+                url: 'http://localhost:8080/api/games/newgame',
                 data: selectedPlayers,
                 headers: {
                     'x-auth-token': jwt
@@ -114,7 +113,7 @@ function Setup() {
     return (
         <div className='Setup container'>
             <div className='table-info'>
-                <div className='table-name'>{tableName}</div>
+                <h1 className='table-name'>{tableName}</h1>
                 <div className='table-status'>Online<div className='status-indicator'></div></div>
             </div>
             <div className='setup-form'>

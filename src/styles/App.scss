@@ -3,6 +3,8 @@
 @import './Setup.scss';
 @import './colours.scss';
 @import './Game.scss';
+@import './Summary.scss';
+@import './Chart.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;1,400&display=swap');
 
@@ -28,6 +30,12 @@ a {
     text-decoration: none;
 }
 
+h1 {
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0 0 32px 0;
+}
+
 h2 {
     font-size: 18px;
     font-weight: 300;
@@ -50,5 +58,24 @@ h2 {
 }
 
 .call-to-action:active {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, .15);
+}
+
+.secondary-cta {
+    color: $purpleLight;
+    border-radius: 5px;
+    border: 2px solid $purpleLight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, .15);
+    font-weight: 700;
+    font-size: 20px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.secondary-cta:active {
     box-shadow: 0px 0px 0px rgba(0, 0, 0, .15);
 }
