@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import gradient from '../images/table-gradient.svg';
 
-const url = 'https://node-bar-billiards-auto.herokuapp.com';
+const url = 'https://node-bar-billiards.herokuapp.com';
 
 function Table(props) {
     const history = useHistory();

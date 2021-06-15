@@ -4,7 +4,7 @@ import axios from 'axios';
 import Chart from './Chart';
 
 import crown from '../images/crown.svg';
-const url = 'https://node-bar-billiards-auto.herokuapp.com';
+const url = 'https://node-bar-billiards.herokuapp.com';
 
 function Summary() {
     const location = useLocation();

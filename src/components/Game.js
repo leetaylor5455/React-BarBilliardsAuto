@@ -5,7 +5,7 @@ import axios from 'axios';
 import Chart from './Chart';
 import Toggle from './Toggle';
 
-const url = 'https://node-bar-billiards-auto.herokuapp.com';
+const url = 'https://node-bar-billiards.herokuapp.com';
 
 function Game(props) {
     const history = useHistory();

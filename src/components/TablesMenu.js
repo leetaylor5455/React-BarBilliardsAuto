@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Table from './Table';
 
-const url = 'https://node-bar-billiards-auto.herokuapp.com';
+const url = 'https://node-bar-billiards.herokuapp.com';
 
 function TablesMenu() {
 
     const [tablesData, setTablesData] = useState([]);
 
     useEffect(() => {
+        console.log('loaded.')
         const fetchData = async () => {
             const result = await axios(
               url + '/api/tables',

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import PlayerListItem from './PlayerListItem';
 
-const url = 'https://node-bar-billiards-auto.herokuapp.com';
+const url = 'https://node-bar-billiards.herokuapp.com';
 
 function Setup() {
     const location = useLocation();

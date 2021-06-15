@@ -17,8 +17,10 @@ function App() {
     setHidden(value);
   }
 
+  console.log('app')
+
   return (
-    <Router>
+    <Router basename='/scorebilliards-auto'>
       <div className="App">
         <Header hidden={hidden}/>
         <Switch>
