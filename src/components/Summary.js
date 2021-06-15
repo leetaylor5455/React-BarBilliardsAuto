@@ -4,6 +4,7 @@ import axios from 'axios';
 import Chart from './Chart';
 
 import crown from '../images/crown.svg';
+const url = 'https://node-bar-billiards-auto.herokuapp.com';
 
 function Summary() {
     const location = useLocation();
@@ -15,7 +16,7 @@ function Summary() {
     const getGameData = useCallback(async () => {
         const result = await axios({
             method: 'POST',
-            url: 'http://localhost:8080/api/games',
+            url: url + '/api/games',
             data: { gameId: gameId },
             headers: {
                 'x-auth-token': jwt
@@ -55,7 +56,7 @@ function Summary() {
         try {
             const result = await axios({
                 method: 'POST',
-                url: 'http://localhost:8080/api/games/newgame',
+                url: url + '/api/games/newgame',
                 data: newGameBody,
                 headers: {
                     'x-auth-token': jwt

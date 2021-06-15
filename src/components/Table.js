@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import gradient from '../images/table-gradient.svg';
 
+const url = 'https://node-bar-billiards-auto.herokuapp.com';
+
 function Table(props) {
     const history = useHistory();
     const [tableWidth, setTableWidth] = useState(0);
@@ -24,7 +26,7 @@ function Table(props) {
     async function handleConnect() {
         const result = await axios({
             method: 'post',
-            url: 'http://localhost:8080/api/auth',
+            url: url + '/api/auth',
             data: {
               tableId: props.tableId,
               password: password,
@@ -65,7 +67,7 @@ function Table(props) {
             <div className='table-connect'
                 onClick={handleConnect}
             >Connect &gt;</div>
-            <img className='menu-background' src={'http://localhost:8080/api/images/' + props.imgName + '.jpg'} alt='Bar Billiards Table' />
+            <img className='menu-background' src={url + '/api/images/' + props.imgName + '.jpg'} alt='Bar Billiards Table' />
             <img className='gradient' src={ gradient } alt='gradient'/>
         </div> 
     )

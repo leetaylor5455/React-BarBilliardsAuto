@@ -5,6 +5,8 @@ import axios from 'axios';
 import Chart from './Chart';
 import Toggle from './Toggle';
 
+const url = 'https://node-bar-billiards-auto.herokuapp.com';
+
 function Game(props) {
     const history = useHistory();
     const location = useLocation();
@@ -22,7 +24,7 @@ function Game(props) {
     }, [history, gameId, jwt])
 
     useEffect(() => {
-        const socket = socketIOClient('http://localhost:8080?data=' + gameId);
+        const socket = socketIOClient(url + '?data=' + gameId);
         socket.on('GameData', data => {
             console.log(data);
             if (data.isComplete) return goToSummary();
@@ -46,7 +48,7 @@ function Game(props) {
 
         const result = await axios({
             method: 'POST',
-            url: 'http://localhost:8080/api/games/nextplayer',
+            url: url + '/api/games/nextplayer',
             data: {
                 gameId: gameId,
                 isSafeBreak: code === 1 ? true : false,
@@ -73,7 +75,7 @@ function Game(props) {
     async function handleEndGame() {
         const result = await axios({
             method: 'POST',
-            url: 'http://localhost:8080/api/games/endgame',
+            url: url + '/api/games/endgame',
             data: { gameId: gameId },
             headers: {
                 'x-auth-token': jwt

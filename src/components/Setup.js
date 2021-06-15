@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import PlayerListItem from './PlayerListItem';
 
+const url = 'https://node-bar-billiards-auto.herokuapp.com';
+
 function Setup() {
     const location = useLocation();
     const { jwt, tableName } = location.state;
@@ -39,7 +41,7 @@ function Setup() {
 
         const result = await axios({
             method: 'POST',
-            url: 'http://localhost:8080/api/players',
+            url: url + '/api/players',
             data: { name: newPlayerInput },
             headers: {
                 'x-auth-token': jwt
@@ -55,7 +57,7 @@ function Setup() {
     const getPlayerList = useCallback(async () => {
         const result = await axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/players',
+            url: url + '/api/players',
             headers: {
                 'x-auth-token': jwt
             }
@@ -72,7 +74,7 @@ function Setup() {
         console.log(playerId)
         const result = await axios({
             method: 'DELETE',
-            url: 'http://localhost:8080/api/players',
+            url: url + '/api/players',
             data: { playerId },
             headers: {
                 'x-auth-token': jwt
@@ -89,7 +91,7 @@ function Setup() {
         try {
             const result = await axios({
                 method: 'POST',
-                url: 'http://localhost:8080/api/games/newgame',
+                url: url + '/api/games/newgame',
                 data: selectedPlayers,
                 headers: {
                     'x-auth-token': jwt
